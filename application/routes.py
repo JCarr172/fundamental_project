@@ -34,3 +34,10 @@ def update_army(number):
         db.session.commit()
         return redirect(url_for("home"))
     return render_template("update_army.html", form=form, title='Update', army=army)
+
+@app.route('/delete/<number>', methods=["GET","POST"])
+def delete(number):
+    army = Army.query.filter_by(id=number).first()
+    db.session.delete(army)
+    db.session.commit()
+    return redirect(url_for("home"))

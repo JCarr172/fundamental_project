@@ -7,9 +7,12 @@
     <h3>{{army.name}}</h3>
     <p>
         Armies faction: {{army.faction}}<br>
-        Codex edition: {{army.codex}}<br>
+        Codex edition: {{army.codex}}
         <form action="{{ url_for('update_army', number=army.id)}}">
             <input type=submit value="Update">
+        </form>
+        <form action="{{ url_for('delete', number=army.id)}}">
+            <input type=submit value="Delete">
         </form>
     </p>
     

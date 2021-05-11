@@ -6,4 +6,4 @@ class ArmyForm(FlaskForm):
     name = StringField('Name of army', validators = [DataRequired()])
     faction = StringField("The army's faction", validators = [DataRequired()])
     codex = StringField('Codex edition', validators = [DataRequired()])
-    submit = SubmitField('Add task')
+    submit = SubmitField('Submit')

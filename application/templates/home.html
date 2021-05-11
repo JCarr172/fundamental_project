@@ -7,7 +7,10 @@
     <h3>{{army.name}}</h3>
     <p>
         Armies faction: {{army.faction}}<br>
-        Codex edition: {{army.codex}}
+        Codex edition: {{army.codex}}<br>
+        <form action="{{ url_for('update_army', number=army.id)}}">
+            <input type=submit value="Update">
+        </form>
     </p>
     
 

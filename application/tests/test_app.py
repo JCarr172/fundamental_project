@@ -44,6 +44,11 @@ class TestViews(TestBase):
         self.assertEqual(response.status_code,200)
         self.assertIn(b'Name of army', response.data)
 
+    def test_update_get(self):
+        response = self.client.get(url_for('update_army', number = 1))
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'Original information', response.data)
+
 class TestAdd(TestBase):
     def test_add_post(self):
         response = self.client.post(

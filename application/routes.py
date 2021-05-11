@@ -21,4 +21,16 @@ def add_army():
             db.session.add(new_army)
             db.session.commit()
             return redirect(url_for("home"))
-    return render_template("add.html", title='Creation', form = form)
+    return render_template("add_army.html", title='Creation', form = form)
+
+@app.route('/update_army/<number>', methods=['GET','POST'])
+def update_army(number):
+    form = ArmyForm()
+    army = Army.query.filter_by(id = number).first()
+    if request.method == 'POST':
+        army.name = form.name.data
+        army.faction = form.faction.data
+        army.codex = form.codex.data
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("update_army.html", form=form, title='Update', army=army)

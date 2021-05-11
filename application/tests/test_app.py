@@ -60,3 +60,23 @@ class TestAdd(TestBase):
             follow_redirects=True
         )
         self.assertIn(b'Sisters of battle',response.data)
+
+class TestUpdate(TestBase):
+    def test_update_post(self):
+        response = self.client.post(
+            url_for('update_army', number = 2),
+            data = dict(
+                name='Adeptus Sororitas',
+                faction='Imperium',
+                codex=8),
+            follow_redirects=True
+        )
+        self.assertIn(b'Adeptus Sororitas',response.data)
+
+class TestDelete(TestBase):
+    def test_delete_post(self):
+        response = self.client.post(
+            url_for('delete', number = 1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b'Necrons',response.data)

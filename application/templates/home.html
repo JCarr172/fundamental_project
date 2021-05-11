@@ -1,7 +1,16 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<h2>This is a test of the home page</h2>
+<h2>Your collection</h2>
 
+{% for army in all_army %}
+    <h3>{{army.name}}</h3>
+    <p>
+        Armies faction: {{army.faction}}<br>
+        Codex edition: {{army.codex}}
+    </p>
+    
+
+{% endfor %}
 
 {% endblock body %}

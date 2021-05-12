@@ -1,36 +1,42 @@
 {% extends 'layout.html' %}
 {% block body %}
 <br><br>
+Original information: <br>
+Unit name: {{unit.name}}<br>
+Category: {{unit.category}}<br>
+Price per model: {{unit.price}}<br>
+Quantity owned: {{unit.quantity}}
+<br><br>
 <form method='POST' action='' >
     {{form.hidden_tag() }}
-    {{form.name.label}} {{form.name}}
+    {{form.name.label}} {{form.name}}<br>
     {% if form.name.errors %}
         {% for error in form.name.errors %}
             {{error}}
         {% endfor %}
     {% endif %}
-    <br><br>
+    <br>
     {{form.category.label}} {{form.category}}
     {% if form.category.errors %}
         {% for error in form.category.errors %}
             {{error}}
         {% endfor %}
     {% endif %}
-    <br><br>
+    <br>
     {{form.army.label}} {{form.army}}
     {% if form.army.errors %}
         {% for error in form.army.errors %}
             {{error}}
         {% endfor %}
     {% endif %}
-    <br><br>
+    <br>
     {{form.price.label}} {{form.price}}
     {% if form.price.errors %}
         {% for error in form.price.errors %}
             {{error}}
         {% endfor %}
     {% endif %}
-    <br><br>
+    <br>
     {{form.quantity.label}} {{form.quantity}}
     {% if form.quantity.errors %}
         {% for error in form.quantity.errors %}

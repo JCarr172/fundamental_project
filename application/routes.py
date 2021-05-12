@@ -71,3 +71,29 @@ def add_unit():
             db.session.commit()
             return redirect(url_for("home"))
     return render_template("add_unit.html", title='Add unit', form = form)
+
+@app.route('/update_unit/<number>', methods=['GET','POST'])
+def update_unit(number):
+    form = UnitForm()
+    unit = Unit.query.filter_by(id = number).first()
+    army = Army.query.filter_by(id = unit.army_id).first()
+    army_id = unit.army_id
+    form.army.choices.append(((army.id, f"{army.name}")))
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            unit.name = form.name.data
+            unit.category = form.category.data
+            unit.price = form.price.data
+            unit.quantity = form.quantity.data
+            unit.army_id = army_id
+            db.session.commit()
+            return redirect(url_for("view_army", number=army_id))
+    return render_template("update_unit.html", form=form, title='Update', unit=unit)
+
+@app.route('/delete_unit/<number>', methods=["GET","POST"])
+def delete_unit(number):
+    unit = Unit.query.filter_by(id=number).first()
+    army_id = unit.army_id
+    db.session.delete(unit)
+    db.session.commit()
+    return redirect(url_for("view_army", number=army_id))

@@ -11,6 +11,12 @@
         Category: {{unit.category}}<br>
         Price per model: {{unit.price}}<br>
         Quantity owned: {{unit.quantity}}
+        <form action="{{ url_for('update_unit', number=unit.id, army_id=unit.army_id)}}">
+            <input type=submit value="Update">
+        </form>
+        <form action="{{ url_for('delete_unit', number=unit.id)}}">
+            <input type=submit value="Delete">
+        </form>
     </p>
     
 

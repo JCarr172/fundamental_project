@@ -7,9 +7,26 @@ codex edition: {{army.codex}}
 <br><br>
 <form method='POST' action='' >
     {{form.hidden_tag() }}
-    {{form.name.label}} {{form.name}}<br>
-    {{form.faction.label}} {{form.faction}}<br>
+    {{form.name.label}} {{form.name}}
+    {% if form.name.errors %}
+        {% for error in form.name.errors %}
+            {{error}}
+        {% endfor %}
+    {% endif %}
+    <br>
+    {{form.faction.label}} {{form.faction}}
+    {% if form.faction.errors %}
+        {% for error in form.faction.errors %}
+            {{error}}
+        {% endfor %}
+    {% endif %}
+    <br>
     {{form.codex.label}} {{form.codex}}
+    {% if form.codex.errors %}
+        {% for error in form.codex.errors %}
+            {{error}}
+        {% endfor %}
+    {% endif %}
     <br>
     {{form.submit}}
 </form>

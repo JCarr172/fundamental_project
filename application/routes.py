@@ -10,7 +10,7 @@ def home():
     all_army = Army.query.all()
     return render_template('home.html', title = 'Home', all_army = all_army)
 
-@app.route('/add_amry', methods=["GET","POST"])
+@app.route('/add_army', methods=["GET","POST"])
 def add_army():
     form = ArmyForm()
     if request.method == "POST":
@@ -28,11 +28,12 @@ def update_army(number):
     form = ArmyForm()
     army = Army.query.filter_by(id = number).first()
     if request.method == 'POST':
-        army.name = form.name.data
-        army.faction = form.faction.data
-        army.codex = form.codex.data
-        db.session.commit()
-        return redirect(url_for("home"))
+        if form.validate_on_submit():
+            army.name = form.name.data
+            army.faction = form.faction.data
+            army.codex = form.codex.data
+            db.session.commit()
+            return redirect(url_for("home"))
     return render_template("update_army.html", form=form, title='Update', army=army)
 
 @app.route('/delete/<number>', methods=["GET","POST"])

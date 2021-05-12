@@ -11,6 +11,12 @@ def home():
     all_unit = Unit.query.all()
     return render_template('home.html', title = 'Home', all_army = all_army, all_unit=all_unit)
 
+@app.route('/view_army/<number>')
+def view_army(number):
+    army_unit = Unit.query.filter_by(army_id = number)
+    army_name = (Army.query.filter_by(id = number).first()).name
+    return render_template('view_army.html', title = 'Army view', army_unit=army_unit, army_name=army_name)
+
 @app.route('/add_army', methods=["GET","POST"])
 def add_army():
     form = ArmyForm()

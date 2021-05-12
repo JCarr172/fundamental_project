@@ -19,6 +19,9 @@
                 {{unit.name}}
             {% endif %}
         {% endfor %}
+        <form action="{{ url_for('view_army', number=army.id)}}">
+            <input type=submit value="More Info">
+        </form>
     </p>
     
 

@@ -48,15 +48,30 @@ class TestViews(TestBase):
         self.assertEqual(response.status_code,200)
         self.assertIn(b'Necrons', response.data)
 
-    def test_add_get(self):
+    def test_add_army_get(self):
         response = self.client.get(url_for('add_army'))
         self.assertEqual(response.status_code,200)
         self.assertIn(b'Name of army', response.data)
 
-    def test_update_get(self):
+    def test_update_army_get(self):
         response = self.client.get(url_for('update_army', number = 1))
         self.assertEqual(response.status_code,200)
         self.assertIn(b'Original information', response.data)
+
+    def test_view_army_get(self):
+        response = self.client.get(url_for('view_army', number = 2))
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'Sisters of battle', response.data)
+
+    def test_add_unit_get(self):
+        response = self.client.get(url_for('add_unit', number = 1))
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'Necrons', response.data)
+
+    def test_update_unit_get(self):
+        response = self.client.get(url_for('update_unit', number = 1))
+        self.assertEqual(response.status_code,200)
+        self.assertIn(b'Necron Lord', response.data)
 
 class TestAdd(TestBase):
     def test_add_unit_post(self):
@@ -83,8 +98,33 @@ class TestAdd(TestBase):
         )
         self.assertIn(b'Sisters of battle',response.data)
 
+    def test_add_army_error_post(self):
+        response = self.client.post(
+            url_for('add_army'),
+            data = dict(
+                name='This is a string that is too long for the field', 
+                faction='Imperium',
+                codex=8),
+            follow_redirects=True
+        )
+        self.assertIn(b'Input was too long',response.data)
+
+    def test_add_unit_error_post(self):
+        response = self.client.post(
+            url_for('add_unit'),
+            data = dict(
+                name='Warrior',
+                Category='Troops',
+                price=10,
+                quantity='Thirty',
+                army_id=1),
+            follow_redirects=True
+        )
+        self.assertIn(b'Please enter a number',response.data)
+
+
 class TestUpdate(TestBase):
-    def test_update_post(self):
+    def test_update_army_post(self):
         response = self.client.post(
             url_for('update_army', number = 2),
             data = dict(
@@ -95,10 +135,61 @@ class TestUpdate(TestBase):
         )
         self.assertIn(b'Adeptus Sororitas',response.data)
 
+    def test_update_unit_post(self):
+        response = self.client.post(
+            url_for('update_unit', number = 1),
+            data = dict(
+                name='Warrior',
+                Category='Troops',
+                price=10,
+                quantity=30,
+                army_id=1),
+            follow_redirects=True
+        )
+        self.assertIn(b'Warrior',response.data)
+
+    def test_update_army_error_post(self):
+        response = self.client.post(
+            url_for('update_army', number = 1),
+            data = dict(
+                name='This is a string that is too long for the field', 
+                faction='Imperium',
+                codex=8),
+            follow_redirects=True
+        )
+        self.assertIn(b'Input was too long',response.data)
+
+    def test_update_unit_error_post(self):
+        response = self.client.post(
+            url_for('update_unit', number = 1),
+            data = dict(
+                name='Warrior',
+                Category='Troops',
+                price=10,
+                quantity='Thirty',
+                army_id=1),
+            follow_redirects=True
+        )
+        self.assertIn(b'Please enter a number',response.data)
+
 class TestDelete(TestBase):
-    def test_delete_post(self):
+    def test_delete_army_post(self):
         response = self.client.post(
             url_for('delete_army', number = 2),
             follow_redirects=True
         )
         self.assertNotIn(b'Sisters of battle',response.data)
+
+    def test_delete_army_with_untits_post(self):
+        response = self.client.post(
+            url_for('delete_army', number = 1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b'Necrons',response.data)
+
+    def test_delete_unit_post(self):
+        response = self.client.post(
+            url_for('delete_unit', number = 1),
+            follow_redirects=True
+        )
+        self.assertNotIn(b'Necron Lord',response.data)

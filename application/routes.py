@@ -1,14 +1,15 @@
 from application import app, db
-from application.models import Army
+from application.models import Army, Unit
 from flask import render_template, request, redirect, url_for
-from application.forms import ArmyForm
+from application.forms import ArmyForm, UnitForm
 
 
 @app.route('/')
 @app.route('/home')
 def home():
     all_army = Army.query.all()
-    return render_template('home.html', title = 'Home', all_army = all_army)
+    all_unit = Unit.query.all()
+    return render_template('home.html', title = 'Home', all_army = all_army, all_unit=all_unit)
 
 @app.route('/add_army', methods=["GET","POST"])
 def add_army():
@@ -21,7 +22,7 @@ def add_army():
             db.session.add(new_army)
             db.session.commit()
             return redirect(url_for("home"))
-    return render_template("add_army.html", title='Creation', form = form)
+    return render_template("add_army.html", title='Add army', form = form)
 
 @app.route('/update_army/<number>', methods=['GET','POST'])
 def update_army(number):
@@ -42,3 +43,21 @@ def delete(number):
     db.session.delete(army)
     db.session.commit()
     return redirect(url_for("home"))
+
+@app.route('/add_unit', methods=["GET","POST"])
+def add_unit():
+    form = UnitForm()
+    armies = Army.query.all()
+    for army in armies:
+        form.army.choices.append((army.id, f"{army.name}"))
+    if request.method == "POST":
+        if form.validate_on_submit():
+            new_unit = Unit(name=form.name.data,
+                        army_id=form.army.data,
+                        category=form.category.data,
+                        price=form.price.data,
+                        quantity=form.quantity.data)
+            db.session.add(new_unit)
+            db.session.commit()
+            return redirect(url_for("home"))
+    return render_template("add_unit.html", title='Add unit', form = form)

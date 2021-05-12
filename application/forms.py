@@ -38,9 +38,10 @@ class UnitForm(FlaskForm):
         validators = [DataRequired(message='Field requried'), 
         Length(min=1,max=50,message='Input was too long')])
     army = SelectField(
-        "The army's faction", 
+        "The army's faction",
+        choices=[], 
         validators = [DataRequired(message='Field requried')])
-    points = StringField(
+    price = StringField(
         'Points per model', 
         validators = [DataRequired(message='Field requried'),
         IntegerValidator(message='Please enter a number')])

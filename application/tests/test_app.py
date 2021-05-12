@@ -4,7 +4,7 @@ from flask_testing import TestCase
 
 import os
 from application import app, db
-from application.models import Army
+from application.models import Army, Unit
 
 class TestBase(TestCase):
     def create_app(self):
@@ -19,13 +19,22 @@ class TestBase(TestCase):
     def setUp(self):
         db.create_all()
 
-        sample1 = Army(name='Necrons',faction='Xenos',codex=9)
-
-        sample2 = Army(name='Sisters of battle', faction='Imperium', codex=8)
-
-        db.session.add(sample1)
+        army1 = Army(name='Necrons',faction='Xenos',codex=9)
+        db.session.add(army1)
         db.session.commit()
-        db.session.add(sample2)
+
+        army2 = Army(name='Sisters of battle', faction='Imperium', codex=8)
+        db.session.add(army2)
+        db.session.commit()
+
+        unit1 = Unit(
+            name='Necron Lord',
+            category='HQ',
+            price=90,
+            quantity=1,
+            army_id=1
+        )
+        db.session.add(unit1)
         db.session.commit()
 
     def tearDown(self):
@@ -50,9 +59,22 @@ class TestViews(TestBase):
         self.assertIn(b'Original information', response.data)
 
 class TestAdd(TestBase):
-    def test_add_post(self):
+    def test_add_unit_post(self):
         response = self.client.post(
             url_for('add_army'),
+            data = dict(
+                name='Retributor',
+                Category='Heavy Support',
+                price=25,
+                quantity=5,
+                army_id=2),
+            follow_redirects=True
+        )
+        self.assertIn(b'Retributor',response.data)
+
+    def test_add_army_post(self):
+        response = self.client.post(
+            url_for('add_unit'),
             data = dict(
                 name='Sisters of battle', 
                 faction='Imperium',
@@ -76,7 +98,7 @@ class TestUpdate(TestBase):
 class TestDelete(TestBase):
     def test_delete_post(self):
         response = self.client.post(
-            url_for('delete', number = 1),
+            url_for('delete_army', number = 2),
             follow_redirects=True
         )
-        self.assertNotIn(b'Necrons',response.data)
+        self.assertNotIn(b'Sisters of battle',response.data)

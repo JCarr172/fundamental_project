@@ -37,9 +37,13 @@ def update_army(number):
             return redirect(url_for("home"))
     return render_template("update_army.html", form=form, title='Update', army=army)
 
-@app.route('/delete/<number>', methods=["GET","POST"])
-def delete(number):
+@app.route('/delete_army/<number>', methods=["GET","POST"])
+def delete_army(number):
     army = Army.query.filter_by(id=number).first()
+    units = Unit.query.filter_by(army_id=army.id)
+    for unit in units:
+        db.session.delete(unit)
+        db.session.commit()
     db.session.delete(army)
     db.session.commit()
     return redirect(url_for("home"))

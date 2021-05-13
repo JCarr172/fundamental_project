@@ -2,13 +2,14 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Length, ValidationError
 
+
 class IntegerValidator:
      def __init__(self, message=None):
          self.message = message
     
      def __call__(self, form, field):
          if field.data.isnumeric() == False:
-             raise ValidationError(self.message)
+             raise ValidationError(self.message)  
 
 class ArmyForm(FlaskForm):
     name = StringField(

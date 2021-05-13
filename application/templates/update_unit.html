@@ -6,10 +6,10 @@ Unit name: {{unit.name}}<br>
 Category: {{unit.category}}<br>
 Price per model: {{unit.price}}<br>
 Quantity owned: {{unit.quantity}}
-<br><br>
+<br><br><br>
 <form method='POST' action='' >
     {{form.hidden_tag() }}
-    {{form.name.label}} {{form.name}}<br>
+    {{form.name.label}} {{form.name}}
     {% if form.name.errors %}
         {% for error in form.name.errors %}
             {{error}}

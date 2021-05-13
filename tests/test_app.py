@@ -12,7 +12,7 @@ class TestBase(TestCase):
             SQLALCHEMY_DATABASE_URI=os.getenv('TEST_DATABASE_URI'),
             SECRET_KEY=os.getenv('TEST_SECRET'),
             DEBUG=True,
-            WTF_CRSF_ENABLED=False
+            WTF_CSRF_ENABLED=False
         )
         return app
 
@@ -76,27 +76,27 @@ class TestViews(TestBase):
 class TestAdd(TestBase):
     def test_add_unit_post(self):
         response = self.client.post(
-            url_for('add_army'),
+            url_for('add_unit'),
             data = dict(
                 name='Retributor',
-                Category='Heavy Support',
-                price=25,
-                quantity=5,
-                army_id=2),
+                category='Heavy Support',
+                price='25',
+                quantity='5',
+                army=2),
             follow_redirects=True
         )
         self.assertIn(b'Retributor',response.data)
 
     def test_add_army_post(self):
         response = self.client.post(
-            url_for('add_unit'),
+            url_for('add_army'),
             data = dict(
-                name='Sisters of battle', 
+                name='Imperial Guard', 
                 faction='Imperium',
-                codex=8),
+                codex='8'),
             follow_redirects=True
         )
-        self.assertIn(b'Sisters of battle',response.data)
+        self.assertIn(b'Imperial Guard',response.data)
 
     def test_add_army_error_post(self):
         response = self.client.post(
@@ -114,10 +114,10 @@ class TestAdd(TestBase):
             url_for('add_unit'),
             data = dict(
                 name='Warrior',
-                Category='Troops',
+                category='Troops',
                 price=10,
                 quantity='Thirty',
-                army_id=1),
+                army=1),
             follow_redirects=True
         )
         self.assertIn(b'Please enter a number',response.data)
@@ -140,10 +140,10 @@ class TestUpdate(TestBase):
             url_for('update_unit', number = 1),
             data = dict(
                 name='Warrior',
-                Category='Troops',
-                price=10,
-                quantity=30,
-                army_id=1),
+                category='Troops',
+                price='10',
+                quantity='30',
+                army=1),
             follow_redirects=True
         )
         self.assertIn(b'Warrior',response.data)
@@ -180,7 +180,7 @@ class TestDelete(TestBase):
         )
         self.assertNotIn(b'Sisters of battle',response.data)
 
-    def test_delete_army_with_untits_post(self):
+    def test_delete_army_with_units_post(self):
         response = self.client.post(
             url_for('delete_army', number = 1),
             follow_redirects=True

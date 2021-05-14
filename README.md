@@ -6,6 +6,10 @@
     * [Objective](#Objective)
     * [Plan](#Plan)
 * [Architecture](#architecture)
+    * [Database Structure](#Database-Structure)
+    * [CI Pipeline](#CI-Pipeline)
+    * [Project Tracking](#Project-Tracking)
+    * [Risk Assessment](#Risk-Assessment)
 * [Development](#development)
 * [Front-End Design](#front-end)
 * [Footer](#footer)
@@ -48,10 +52,18 @@ I will be using Python to acheive the back end functionality of this application
 ## Architecture
 #
 ### **Database Structure**
-Below is an image of my entity relationship diagram. 
+Below is an image of my entity relationship diagram that shows the implentated structure of my database. 
 
-![My entity relationship diagram showing a many to one relationship between the unit table and army table](https://imgur.com/a/cVpWrQ5)
+![My entity relationship diagram showing a many to one relationship between the unit table and army table](https://i.imgur.com/Ww90HZ9.png)
+
+As shown the app will model a one to many relationship between armies and units, allowing the user to create an army with many units associated with it. 
+
+Below is a proposed entity diagram for the next development of the app in which I would add another table to store user data which would have a many to many relationship with the units table so a user have multiple units and each unit could be owned by multiple users.
+
+![An entity relationship diagram show a many to one relationship between the unit table and army table and a many to many relationship between unit and user](https://i.imgur.com/BSWuSm0.png)
 ### **CI Pipeline**
+
+![My CI pipeline](https://i.imgur.com/4wse78J.png)
 
 ### **Project Tracking**
 

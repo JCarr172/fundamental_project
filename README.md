@@ -21,11 +21,11 @@
 
 The brief for this project was:  
 
-Create a CRUD application with ultisation of supporting tools, methodologies and technologies that encapsulate all core modules.
+Create a CRUD application with utilisation of supporting tools, methodologies and technologies that encapsulate all core modules.
 
-Specificlly this requires:
-- Creating a functional CRUD appliction
-- Creating a functional front-end webiste
+Specifically this requires:
+- Creating a functional CRUD application
+- Creating a functional front-end website
 - A project tracking system
 - A version control system
 - Automated testing
@@ -53,7 +53,7 @@ I will be using Python to acheive the back end functionality of this application
 ## Architecture
 #
 ### **Database Structure**
-Below is an image of my entity relationship diagram that shows the implentated structure of my database. 
+Below is an image of my entity relationship diagram that shows the implementated structure of my database. 
 
 ![My entity relationship diagram showing a many to one relationship between the unit table and army table](https://i.imgur.com/Ww90HZ9.png)
 
@@ -72,10 +72,10 @@ Throughout this project I used continuous integration to allow smooth developmen
 
 ### **Project Tracking**
 
-To track the progress of my porject I used a trello board pictured below:
+To track the progress of my project I used a trello board pictured below:
 ![My trello board](https://i.imgur.com/HxQZyk4.png)
 
-The board is desgined so that each task is moved through each stage as the task is worked on. I have added coloured labels to each card in order to indicated which part of the project they are related to. A link to the full trello board can be found here: [My trello board](https://trello.com/b/HLRWiOv1/fundamental-project)
+The board is designed so that each task is moved through each stage as the task is worked on. I have added coloured labels to each card in order to indicated which part of the project they are related to. A link to the full trello board can be found here: [My trello board](https://trello.com/b/HLRWiOv1/fundamental-project)
 
 ### **Risk assessment**
 
@@ -86,7 +86,7 @@ Below is my risk assessment showing both major and minor risks that are associat
 #
 ### **Testing**
 
-The testing of the python code was done using Pytest to run different tests. Unit tests are designed to assert that if a function is run, it produces a known output. Using Jenkins these tests are run every time something is pushed up to GitHub adn Jenkins will produce a report detailing whether any of the tests were successful or not. Pytest can also give a coverage report to show how many lines of code was tested. Below is a copy of the coverage report.
+The testing of the python code was done using Pytest to run different tests. Unit tests are designed to assert that if a function is run, it produces a known output. Using Jenkins these tests are run every time something is pushed up to GitHub and Jenkins will produce a report detailing whether any of the tests were successful or not. Pytest can also give a coverage report to show how many lines of code was tested. Below is a copy of the coverage report.
 
 ![Testing coverage](https://i.imgur.com/wnBKeja.png)
 
@@ -113,7 +113,7 @@ python3 -m pytest --cov=application
 ```
 ### **Front end**
 
-When a user navigates to the url or to the home page they are shown all current armies in the database along with the associated untis. At the top of the page are the URL's to the different pages. This is part of the layout and so will appear on each page. 
+When a user navigates to the url or to the home page they are shown all current armies in the database along with the associated units. At the top of the page are the URL's to the different pages. This is part of the layout and so will appear on each page. 
 
 ![Home page](https://i.imgur.com/5Eba1qm.png)
 

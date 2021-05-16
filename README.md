@@ -11,8 +11,9 @@
     * [Project Tracking](#Project-Tracking)
     * [Risk Assessment](#Risk-Assessment)
 * [Development](#development)
-* [Front-End Design](#front-end)
-* [Footer](#footer)
+    * [Testing](#Testing)
+    * [Front end](#Front-end)
+* [Further Sprints](#Further-sprints)
 
 ## Introduction
 #
@@ -112,8 +113,27 @@ python3 -m pytest --cov=application
 ```
 ### **Front end**
 
+When a user navigates to the url or to the home page they are shown all current armies in the database along with the associated untis. At the top of the page are the URL's to the different pages. This is part of the layout and so will appear on each page. 
 
+![Home page](https://i.imgur.com/5Eba1qm.png)
 
-## Footer
+Going to add army page allows you to create a new army file.
+
+![Add army](https://i.imgur.com/X3LTonO.png)
+
+going to the add unit page allows you to create a new unit that is associated with one of the already created armies.
+
+![Add unit](https://i.imgur.com/Luaiitb.png)
+
+## Further Sprints
+#
+In future sprints there are a couple of features I would like to implement:
+* Be able to add user accounts and have each user have different units associated with their accounts.
+* Calculate the total number of points each unit is worth based of the inputted points per model and quantity.
+* The ability to filter units by their type not just which army they belong to.
+* The aesthetic improvement, making the front end more appealing to use.
+
+## Author
 #
 
+James Carr

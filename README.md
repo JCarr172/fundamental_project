@@ -136,4 +136,4 @@ In future sprints there are a couple of features I would like to implement:
 ## Author
 #
 
-James Carr
+By James Carr
